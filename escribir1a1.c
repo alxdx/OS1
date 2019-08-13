@@ -3,7 +3,6 @@
 
 int main(int argc, char *argv[]){
 	FILE *archivo;
-<<<<<<< HEAD
 	int aux,i;
 
 	if(argc>1){
@@ -25,7 +24,5 @@ int main(int argc, char *argv[]){
 		printf("\n ingresa el numero de datos a guardar\n");
 
 	//return 0;
-=======
->>>>>>> e6270a1b3694037217f669df51529a10a6ac1bdf
 }
 
