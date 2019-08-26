@@ -1,8 +1,8 @@
-
+#include <sys/wait.h>
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdio.h>
- 
+#include <fcntl.h> 
 int main(int argc, char *argv[]){
 
     pid_t pid1, pid2;
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]){
             printf("Soy el padre (%d, hijo de %d)\n", getpid(), getppid());
             for (int i = 0; i < 10; ++i){
                 read(file1,&a,sizeof(int));
-                read(file1,&b,sizeof(int));
+                read(file2,&b,sizeof(int));
                 suma=a+b;
                 printf("%d + %d = %d\n",a,b,suma);
             }
