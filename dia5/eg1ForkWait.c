@@ -7,7 +7,7 @@
 int main(){
 	pid_t pid;
 	int file1;
-	int *status;
+	int status;
 	if((pid=fork())==0){
 		creat("datos.dat",0777);
 		file1=open("datos.dat",01);
@@ -15,11 +15,13 @@ int main(){
 			write(file1,&i,sizeof(int));
 		}
 	}else{
-		wait(status);
+		wait(&status);
 		int n;
 		file1=open("datos.dat",00);
-		read(file1,&n,sizeof(int));
-		printf("%d\n",n );
+		for(int i=1;i<=10;i++){
+  		read(file1,&n,sizeof(int));
+  		printf("%d\n",n );
+		}    
 	}
 
 	return 0;
