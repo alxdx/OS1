@@ -1,4 +1,6 @@
 
+//ejercicios en 144
+//programa 2.9 run back y ls -l &
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <unistd.h>

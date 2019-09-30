@@ -1,19 +1,25 @@
-#include <stdio.h>
-#include <unistd.h>
-int main(int argc, char const *argv[])
+#include<stdio.h>
+#include<stdlib.h>
+#include<sys/types.h>
+#include<unistd.h>
+
+int main(int argc, char **argv[])
 {
 	pid_t pid;
 	char *argumentos[3];
+	pid = fork();
 
-	argumentos[0]="ls";
-	argumentos[1]="-l";
-	argumentos[2]=NULL;
-	if ((pid=fork())==0){
-		execvp(argumentos[0],argumentos);
-		perror("excec");
+	argumentos[0] = "./hijo";
+	
+	switch(pid)
+	{
+		case -1:
+			exit(-1);
+
+		case 0:
+			execvp("./hijo","./hijo",argv[1],argv[2],NULL);
+			break;
+		default:
+			printf("Proceso padre\n");
 	}
-	else
-		printf("%s\n","proceso padre" );
-
-	return 0;
 }

@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <fcntl.h> 
+#include <signal.h>
+
 void handler1();
 void handler2();
 
@@ -44,11 +46,9 @@ int main(int argc, char *argv[]){
 
         }
         else{ //padre
-        	
-        	(sigaction(SIGUSR1,&p,NULL))
-        		pause();
-        		sigaction(SIGUSR2,&q,NULL);
-        	pause();
+        	sigaction(SIGUSR1,&p,NULL);
+        	sigaction(SIGUSR2,&q,NULL);
+          pause();
         	pause();
         }
     }
@@ -62,7 +62,7 @@ void handler2(){
             int a,b,suma;
 	        int file1=open("datos.dat",00);            
             int file2=open("datos2.dat",00);
-
+            
             printf("Soy el padre (%d, hijo de %d)\n", getpid(), getppid());
             for (int i = 0; i < 10; ++i){
                 read(file1,&a,sizeof(int));

@@ -1,14 +1,17 @@
-#include <stdio.h>
-#include <sys/types.h>
+#include<stdio.h>
+#include<sys/types.h>
+#include<stdlib.h>
+#include<unistd.h>
 
-int main(int argc, char const *argv[])
+int main(int args, char *argv[])
 {
 	pid_t pid;
 	int status;
-	if((pid=fork()==0)){
-		execlp("ls","ls","-l",NULL);
-		perror("exec");
+	pid = fork();
+
+	if(pid==0){
+			execlp("./hijo","./hijo",argv[1],argv[2],NULL);
+			perror("exec");		
 	}else
-		printf("%s\n","proceso padrea");
-	return 0;
+		printf("%s\n","proceso padre" );	
 }
