@@ -9,14 +9,15 @@ int main(int args, char *argv[])
 	int status;
 	pid = fork();
 
-	if(pid==0){
-			execlp("./hijo","./hijo",argv[1],argv[2],NULL);
-			perror("exec");		
-	}else
+	switch(pid)
+	{
+		case -1:
+			exit(-1);
 
-		printf("%s\n","proceso padre" );	
-
-
-	return 0;
+		case 0:
+			execlp("./hijo1","./hijo1",argv[1],argv[2],NULL);
+			perror("exec");
+			break;
+	}
 
 }
