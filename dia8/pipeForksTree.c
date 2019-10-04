@@ -2,6 +2,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include <fcntl.h> 
+#include <sys/wait.h>
 
 int main(int argc, char const *argv[])
 {
@@ -9,7 +10,8 @@ int main(int argc, char const *argv[])
 	if (fork()==0){//M 
 		if (fork()==0)//Q
 		{
-			/* code */
+			/* code */sleep(20);
+
 		}
 		else{
 			if (fork()==0)//z
@@ -18,20 +20,19 @@ int main(int argc, char const *argv[])
 				{
 					if (fork()==0)//t
 					{
-						/* code */
+						/* code */sleep(20);
 					}
 					else{
-
+							sleep(20);
 					}
 				}
 				else{
-
+						sleep(20);
 				}
 			}
 			else{
-
+				sleep(20);
 			}
-			//aqui va lo que hace m
 		}
 	}
 	else{
@@ -39,43 +40,53 @@ int main(int argc, char const *argv[])
 		{
 			if (fork()==0)//a
 			{
-				/* code */
+				/* code */sleep(20);
 			}
 			else{
 				if (fork()==0)//w
 				{
 					if (fork()==0)//b
 					{
-						/* code */
+						/* code */sleep(20);
 					}
 					else{
 						if (fork()==0)//D
 						{
 							if (fork()==0)//F
 							{
-								/* code */
+								/* code */ sleep(20);
 							}
 							else{
 								if (fork()==0)//E
 								{
-									/* code */
+									/* code */ sleep(20);
+								}
+								else{
+									sleep(20);
 								}
 							}
+						}
+						else{
+							sleep(20);
 						}
 					}
 				}
 				else{
 					if (fork()==0)//k
 					{
-						/* code */
+						/* code */sleep(20);
 					}
 					else{
-						//lo que hace L
+						sleep(20);
+						//lo que hace L 
 					}
 				}
 			}
 		}
+		else{
+			sleep(20);
 		//lo que hace R
+		}
 	}
 	return 0;
 }
