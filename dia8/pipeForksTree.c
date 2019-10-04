@@ -6,11 +6,17 @@
 
 int main(int argc, char const *argv[])
 {
-	//R
+		//R
+	int fd[2];
+	pipe(fd);
+	int aux;
 	if (fork()==0){//M 
 		if (fork()==0)//Q
 		{
-			/* code */sleep(20);
+			while(1){
+					read(fd[0],&aux, sizeof(int));
+					printf("soy Q leo el dato %d\n\tpid:%d",aux,getpid()); 
+				}
 
 		}
 		else{
@@ -20,14 +26,21 @@ int main(int argc, char const *argv[])
 				{
 					if (fork()==0)//t
 					{
-						/* code */sleep(20);
+						while(1){
+								read(fd[0],&aux,sizeof(int));
+								printf("soy T leo el dato %d\n\tpid:%d",aux,getpid());
+							}
 					}
 					else{
-							sleep(20);
+						while(1){
+
+							read(fd[0],&aux,sizeof(int));
+							printf("soy S leo el dato %d\n\tpid:%d",aux,getpid());
+						}
 					}
 				}
 				else{
-						sleep(20);
+												printf("soy Z leo el dato %d\n\tpid:%d",aux,getpid());
 				}
 			}
 			else{
