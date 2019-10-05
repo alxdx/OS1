@@ -4,6 +4,8 @@
 #include <fcntl.h> 
 #include <sys/wait.h>
 
+void killFunc();
+
 int main(int argc, char const *argv[])
 {
 		//R
@@ -15,7 +17,7 @@ int main(int argc, char const *argv[])
 		{
 			while(1){
 					read(fd[0],&aux, sizeof(int));
-					printf("soy Q leo el dato %d\n\tpid:%d",aux,getpid()); 
+					printf("\nsoy Q leo el dato %d\n\tpid:%d",aux,getpid()); 
 				}
 
 		}
@@ -28,20 +30,20 @@ int main(int argc, char const *argv[])
 					{
 						while(1){
 								read(fd[0],&aux,sizeof(int));
-								printf("soy T leo el dato %d\n\tpid:%d",aux,getpid());
+								printf("\nsoy T leo el dato %d\n\tpid:%d",aux,getpid());
 							}
 					}
 					else{
 						while(1){
 							read(fd[0],&aux,sizeof(int));
-							printf("soy S leo el dato %d\n\tpid:%d",aux,getpid());
+							printf("\nsoy S leo el dato %d\n\tpid:%d",aux,getpid());
 						}
 					}
 				}
 				else{
 					while(1){
 							read(fd[0],&aux,sizeof(int));
-							printf("soy Z leo el dato %d\n\tpid:%d",aux,getpid());
+							printf("\nsoy Z leo el dato %d\n\tpid:%d",aux,getpid());
 					}
 				}
 			}
@@ -49,7 +51,7 @@ int main(int argc, char const *argv[])
 				dato=10;
 				while(1){
 					write(fd[1],&dato,sizeof(int));
-					printf("soy M escribo el dato %d\n\tpid:%d",dato,getpid());
+					printf("\nsoy M escribo el dato %d\n\tpid:%d",dato,getpid());
 				}
 			}
 		}
@@ -62,7 +64,7 @@ int main(int argc, char const *argv[])
 				dato=25;
 				while(1){
 					write(fd[1],&dato,sizeof(int));
-					printf("soy A escribo el dato %d\n\tpid:%d",dato,getpid());
+					printf("\nsoy A escribo el dato %d\n\tpid:%d",dato,getpid());
 				}
 			}
 			else{
@@ -72,7 +74,7 @@ int main(int argc, char const *argv[])
 					{
 						while(1){
 								read(fd[0],&aux,sizeof(int));
-								printf("soy B leo el dato %d\n\tpid:%d",aux,getpid());
+								printf("\nsoy B leo el dato %d\n\tpid:%d",aux,getpid());
 						}
 					}
 					else{
@@ -83,7 +85,7 @@ int main(int argc, char const *argv[])
 								dato=50;
 								while(1){
 									write(fd[1],&dato,sizeof(int));
-									printf("soy F escribo el dato %d\n\tpid:%d",dato,getpid());
+									printf("\nsoy F escribo el dato %d\n\tpid:%d",dato,getpid());
 								}
 
 							}
@@ -93,7 +95,7 @@ int main(int argc, char const *argv[])
 									dato=55;
 									while(1){
 										write(fd[1],&dato,sizeof(int));
-										printf("soy E escribo el dato %d\n\tpid:%d",dato,getpid());
+										printf("\nsoy E escribo el dato %d\n\tpid:%d",dato,getpid());
 									}
 
 								}
@@ -101,7 +103,7 @@ int main(int argc, char const *argv[])
 									dato=45;
 									while(1){
 										write(fd[1],&dato,sizeof(int));
-										printf("soy D escribo el dato %d\n\tpid:%d",dato,getpid());
+										printf("\nsoy D escribo el dato %d\n\tpid:%d",dato,getpid());
 									}
 
 								}
@@ -110,7 +112,7 @@ int main(int argc, char const *argv[])
 						else{//lo que hace W
 							while(1){
 								read(fd[0],&aux,sizeof(int));
-								printf("soy W leo el dato %d\n\tpid:%d",aux,getpid());
+								printf("\nsoy W leo el dato %d\n\tpid:%d",aux,getpid());
 							}
 
 						}
@@ -121,7 +123,7 @@ int main(int argc, char const *argv[])
 					{
 						while(1){
 							read(fd[0],&aux,sizeof(int));
-							printf("soy K leo el dato %d\n\tpid:%d",aux,getpid());
+							printf("\nsoy K leo el dato %d\n\tpid:%d",aux,getpid());
 						}
 
 					}
@@ -130,7 +132,7 @@ int main(int argc, char const *argv[])
 						dato=20;
 						while(1){
 							write(fd[1],&dato,sizeof(int));
-							printf("soy L escribo el dato %d\n\tpid:%d",dato,getpid());
+							printf("\nsoy L escribo el dato %d\n\tpid:%d",dato,getpid());
 						}
 
 					}
@@ -143,7 +145,7 @@ int main(int argc, char const *argv[])
 			struct sigaction killer;
 			killer.sa_handler=killFunc;
 			killer.sa_flags=0;
-			sigemptyset(&sa_mask);
+			sigemptyset(&killer.sa_mask);
 			sigaction(SIGALRM,&killer,NULL);
 		}
 	}
