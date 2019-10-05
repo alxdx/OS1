@@ -3,16 +3,19 @@
 #include <unistd.h>
 #include <fcntl.h> 
 #include <sys/wait.h>
+#include <unistd.h>
 
 void killFunc();
-
+pid_t pid;
 int main(int argc, char const *argv[])
 {
 		//R
+	
 	int fd[2];
 	pipe(fd);
 	int aux,dato;
-	if (fork()==0){//M 
+
+	if ((pid=fork())==0){//M 
 		if (fork()==0)//Q
 		{
 			while(1){
@@ -141,17 +144,20 @@ int main(int argc, char const *argv[])
 		}
 		else{
 		//lo que hace R
-			alarm(5);
 			struct sigaction killer;
 			killer.sa_handler=killFunc;
 			killer.sa_flags=0;
 			sigemptyset(&killer.sa_mask);
 			sigaction(SIGALRM,&killer,NULL);
+			alarm(5);
+				
+				return 0;
+			
 		}
 	}
-	return 0;
+
 }
 
 void killFunc(){
-	kill(0,SIGKILL);
+	kill(getpgid(pid),SIGKILL);
 }
