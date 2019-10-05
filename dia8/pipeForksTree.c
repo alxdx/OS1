@@ -9,7 +9,7 @@ int main(int argc, char const *argv[])
 		//R
 	int fd[2];
 	pipe(fd);
-	int aux;
+	int aux,dato;
 	if (fork()==0){//M 
 		if (fork()==0)//Q
 		{
@@ -33,18 +33,24 @@ int main(int argc, char const *argv[])
 					}
 					else{
 						while(1){
-
 							read(fd[0],&aux,sizeof(int));
 							printf("soy S leo el dato %d\n\tpid:%d",aux,getpid());
 						}
 					}
 				}
 				else{
-												printf("soy Z leo el dato %d\n\tpid:%d",aux,getpid());
+					while(1){
+							read(fd[0],&aux,sizeof(int));
+							printf("soy Z leo el dato %d\n\tpid:%d",aux,getpid());
+					}
 				}
 			}
 			else{
-				sleep(20);
+				dato=10;
+				while(1){
+					write(fd[1],&dato,sizeof(int));
+					printf("soy M escribo el dato %d\n\tpid:%d",dato,getpid());
+				}
 			}
 		}
 	}
@@ -53,53 +59,97 @@ int main(int argc, char const *argv[])
 		{
 			if (fork()==0)//a
 			{
-				/* code */sleep(20);
+				dato=25;
+				while(1){
+					write(fd[1],&dato,sizeof(int));
+					printf("soy A escribo el dato %d\n\tpid:%d",dato,getpid());
+				}
 			}
 			else{
 				if (fork()==0)//w
 				{
 					if (fork()==0)//b
 					{
-						/* code */sleep(20);
+						while(1){
+								read(fd[0],&aux,sizeof(int));
+								printf("soy B leo el dato %d\n\tpid:%d",aux,getpid());
+						}
 					}
 					else{
 						if (fork()==0)//D
 						{
 							if (fork()==0)//F
 							{
-								/* code */ sleep(20);
+								dato=50;
+								while(1){
+									write(fd[1],&dato,sizeof(int));
+									printf("soy F escribo el dato %d\n\tpid:%d",dato,getpid());
+								}
+
 							}
 							else{
 								if (fork()==0)//E
 								{
-									/* code */ sleep(20);
+									dato=55;
+									while(1){
+										write(fd[1],&dato,sizeof(int));
+										printf("soy E escribo el dato %d\n\tpid:%d",dato,getpid());
+									}
+
 								}
 								else{
-									sleep(20);
+									dato=45;
+									while(1){
+										write(fd[1],&dato,sizeof(int));
+										printf("soy D escribo el dato %d\n\tpid:%d",dato,getpid());
+									}
+
 								}
 							}
 						}
-						else{
-							sleep(20);
+						else{//lo que hace W
+							while(1){
+								read(fd[0],&aux,sizeof(int));
+								printf("soy W leo el dato %d\n\tpid:%d",aux,getpid());
+							}
+
 						}
 					}
 				}
 				else{
 					if (fork()==0)//k
 					{
-						/* code */sleep(20);
+						while(1){
+							read(fd[0],&aux,sizeof(int));
+							printf("soy K leo el dato %d\n\tpid:%d",aux,getpid());
+						}
+
 					}
 					else{
-						sleep(20);
 						//lo que hace L 
+						dato=20;
+						while(1){
+							write(fd[1],&dato,sizeof(int));
+							printf("soy L escribo el dato %d\n\tpid:%d",dato,getpid());
+						}
+
 					}
 				}
 			}
 		}
 		else{
-			sleep(20);
 		//lo que hace R
+			alarm(5);
+			struct sigaction killer;
+			killer.sa_handler=killFunc;
+			killer.sa_flags=0;
+			sigemptyset(&sa_mask);
+			sigaction(SIGALRM,&killer,NULL);
 		}
 	}
 	return 0;
+}
+
+void killFunc(){
+	kill(0,SIGKILL);
 }
