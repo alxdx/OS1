@@ -5,7 +5,7 @@
 #include <sys/wait.h>
 
 void killFunc();
-
+int s=1;
 int main(int argc, char const *argv[])
 {
 		//R
