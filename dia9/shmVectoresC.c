@@ -15,9 +15,11 @@ int main(int argc, char const *argv[])
 	key_t key=ftok(".",'o');
 	shm_id=shmget(key,sizeof(ARR)*2,0666);
 	ptr=(int *)shmat(shm_id,NULL,0);
+  int suma=0;
 	for (int i = 0; i < N; ++i)
 	{
-		printf("%d--%d\n",*(ptr+i),*(ptr+N+i));
+    suma+=*(ptr+i)+*(ptr+N+i);
+		printf("%d\n",suma);
 	}
   shmdt(ptr);
   shmctl(shm_id,IPC_RMID,NULL);

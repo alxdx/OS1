@@ -16,13 +16,13 @@ int main(int argc, char const *argv[])
 	}
 
 	int shm_id,*ptr;
-	key_t key=ftok(".",'o');
-	shm_id=shmget(key,sizeof(IMPARES)*2,0666);
+	key_t key=ftok(".",'e');
+	shm_id=shmget(key,sizeof(IMPARES),0666|IPC_CREAT);
 	ptr=(int *)shmat(shm_id,NULL,0);
 
-	for (int i =N; i < (2*N); ++i)
+	for (int i =0; i <N; ++i)
 	{
-		*(ptr+i)=IMPARES[i-N];
+		*(ptr+i)=IMPARES[i];
 	}
   
 	shmdt(ptr);
