@@ -23,7 +23,7 @@ int main(int argc, char const *argv[]){
 	scanf("%s",&info.car);
   
 	shm_id=shmget(key,sizeof(struct DATA),0666|IPC_CREAT);
-	mem=(struct DATA *)shmat(shm_id,NULL,0);
+	mem=(struct DATA *)shmat(shm_id,0,0);
 	*mem=info;
 	shmdt(mem);
 }
