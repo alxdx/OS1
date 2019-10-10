@@ -6,30 +6,25 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <sys/wait.h>
-
 int main(int argc, char const *argv[])
 {
-	int N=atoi(argv[1]);
-  int ARR[N];
-	int shm_idPar,shm_idImpar,*ptrPar,*ptrImpar;
-	key_t keyPar=ftok(".",'a');
-  key_t keyImpar=ftok(".",'e');
+  int N=atoi(argv[1]);
+  int PARES[N];
+  for (int i = 1; i <=N; ++i)
+  {
+    PARES[i-1]=2*i;
+  }
 
-	shm_idPar=shmget(keyPar,sizeof(ARR),0666);
-  shm_idImpar=shmget(keyImpar,sizeof(ARR),0666);
-	
-  ptrPar=(int *)shmat(shm_idPar,NULL,0);
-  ptrImpar=(int *)shmat(shm_idImpar,NULL,0);
-  int suma=0;
-	
-  for (int i = 0; i < N; ++i)
-	{
-    suma+=*(ptrPar+i)+*(ptrImpar+i);
-		printf("%d\n",suma);
-	}
-  shmdt(ptrPar);
-  shmdt(ptrImpar);
-  shmctl(shm_idPar,IPC_RMID,NULL);
-  shmctl(shm_idImpar,IPC_RMID,NULL);
-	return 0;
+  int shm_id,*ptr;
+  key_t key=ftok(".",'a');
+  shm_id=shmget(key,sizeof(PARES),0666|IPC_CREAT);
+  ptr=(int *)shmat(shm_id,NULL,0);
+
+  for (int i =0; i <N; ++i)
+  {
+    *(ptr+i)=PARES[i];
+  }
+  
+  shmdt(ptr);
+  return 0;
 }
