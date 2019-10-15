@@ -16,6 +16,12 @@ int main(int argc, char const *argv[])
 	int sizeFile=(int)fileSi.st_size;
 	printf("%d\n",sizeFile);
 
+	//mando tamaño del archivo
+	key_t keyPID=ftok(".",'d');
+	int shmemPID=shmget(keyPID,sizeof(int),0666|IPC_CREAT);
+	int *pid_mem=(int *)shmat(shmemPID,NULL,0);
+	*pid_mem=sizeFile;
+
 	char DATAFILE[sizeFile],*file_mem;
 	read(file, DATAFILE, sizeFile);
 	//printf("%s\n",DATAFILE);
@@ -30,10 +36,6 @@ int main(int argc, char const *argv[])
 	}
 
 	sleep(5);
-	key_t keyPID=ftok(".",'d');
-	int shmemPID=shmget(keyPID,sizeof(int),0666);
-	int *pid_mem=(int *)shmat(shmemPID,NULL,0);
-
 	printf("%d\n",*pid_mem );
 
 	return 0;

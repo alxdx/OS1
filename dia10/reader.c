@@ -13,14 +13,15 @@ int main(int argc, char const *argv[])
 	int file;
 
 	key_t keyPID=ftok(".",'d');
-	int shmemPID=shmget(keyPID,sizeof(int),0666|IPC_CREAT);
+	int shmemPID=shmget(keyPID,sizeof(int),0666);
 	int *pid_mem=(int *)shmat(shmemPID,NULL,0);
-	*pid_mem=200;
+	int sizeFile=*pid_mem;
+	*pid_mem=getpid();
 	//printf("%lu\n",sizeFile);
 
 	sleep(5);
 	key_t keyFile=ftok(".",'c');
-	int shmem=shmget(keyFile,492,0666);
+	int shmem=shmget(keyFile,sizeFile,0666);
 	char *file_mem=(char *)shmat(shmem,NULL,0);
 	
   int i=0;
