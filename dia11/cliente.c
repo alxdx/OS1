@@ -1,15 +1,8 @@
-#include <fcntl.h>
-#include <stdlib.h>
 #include <stdio.h> 
 #include <sys/ipc.h> 
 #include <sys/msg.h> 
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <unistd.h>
-
 
 #define MAX_NAME 100
-#define MAX 10000
  //tipo 1 numero de elementos
 //tipo 2 nombe de archios
 //tipo 3 datos
@@ -21,7 +14,7 @@ struct mesg_buffer {
 struct data_buffer
 {
 	long data_type;
-	char data_doc[MAX];
+	char data_doc[MAX]
 };
 
 int main(int argc, char const *argv[])
@@ -43,13 +36,12 @@ int main(int argc, char const *argv[])
     message.mesg_type = 2;
     for (int i = 0; i < n; ++i)
     {
-		scanf("%s",message.mesg_text);
+		gets(message.mesg_text);
 		msgsnd(msgid, &message, sizeof(message), 0);
-    
-		msgrcv(msgid, &fileData, sizeof(fileData),3,0); 
+
+		msgrcv(msgid, &message, sizeof(data_buffer), 3, 0); 
     	printf(">> %s \n",fileData.data_doc); 
 
     }
-        msgctl(msgid, IPC_RMID, NULL); 
 	return 0;
 }
