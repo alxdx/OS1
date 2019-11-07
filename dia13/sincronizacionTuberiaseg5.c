@@ -67,16 +67,19 @@ int main(int argc, char const *argv[]){
 }
 
 void generarPares(int tuberia, int t1, int t2){
-	int i=0;
+	int i=0,aux;
 	char testigo;
 	write(tuberia,&i,sizeof(int));
 	//cede el turno a p2
 	write(t1,&testigo,sizeof(char));
-	for (int i = 2; i < 2000; i=i+2){
+	for (i = 2; i < 20; i=i+10){
 		//espera turno
 		read(t2,&testigo,sizeof(char));
 		//inserta numero a pipe
-		write(tuberia,&i,sizeof(int));
+		aux=i+10;
+		for(int j =i;j<aux;j=j+2){
+			write(tuberia,&j,sizeof(int));
+		}
 		//cede turno
 		write(t2,&testigo,sizeof(char));
 	}
@@ -84,13 +87,16 @@ void generarPares(int tuberia, int t1, int t2){
 }
 
 void generarImpares(int tuberia, int t1, int t2){
-	int i=0;
+	int i=0,aux;
 	char testigo;
-	for (int i = 1; i < 2000; i=i+2){
+	for (i = 1; i < 20; i=i+10){
 		//espera turno
 		read(t2,&testigo,sizeof(char));
 		//inserta numero a pipe
-		write(tuberia,&i,sizeof(int));
+		aux=i+10;
+		for(int j =i;j<aux;j=j+2){
+			write(tuberia,&j,sizeof(int));
+		}
 		//cede turno
 		write(t2,&testigo,sizeof(char));
 	}
