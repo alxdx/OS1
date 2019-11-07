@@ -6,7 +6,11 @@
 #include <unistd.h>
 
 void killFunc();
+<<<<<<< HEAD
 pid_t pid;
+=======
+int s=1;
+>>>>>>> refs/remotes/origin/master
 int main(int argc, char const *argv[])
 {
 		//R
