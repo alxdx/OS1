@@ -16,13 +16,13 @@ int main()
     char str1[80], str2[80]; 
     while (1) 
     { 
-        fd1 = open(myfifo,O_RDONLY); 
+        fd1 = open(myfifo,O_RDONLY); //00
         read(fd1, str1, 80); 
   
         printf("User1: %s\n", str1); 
         close(fd1); 
   
-        fd1 = open(myfifo,O_WRONLY); 
+        fd1 = open(myfifo,O_WRONLY); //
         fgets(str2, 80, stdin); 
         write(fd1, str2, strlen(str2)+1); 
         close(fd1); 
