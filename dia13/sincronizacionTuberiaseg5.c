@@ -72,16 +72,22 @@ void generarPares(int tuberia, int t1, int t2){
 	write(tuberia,&i,sizeof(int));
 	//cede el turno a p2
 	write(t1,&testigo,sizeof(char));
-	for (i = 2; i < 20; i=i+10){
+	for (i = 2; i < 50; i=i+10){
 		//espera turno
 		read(t2,&testigo,sizeof(char));
 		//inserta numero a pipe
-		aux=i+10;
-		for(int j =i;j<aux;j=j+2){
-			write(tuberia,&j,sizeof(int));
-		}
+			write(tuberia,&i,sizeof(int));
+			i+=2;
+			write(tuberia,&i,sizeof(int));
+			i+=2;
+			write(tuberia,&i,sizeof(int));
+			i+=2;
+			write(tuberia,&i,sizeof(int));
+			i+=2;
+			write(tuberia,&i,sizeof(int));
+			i+=2;
 		//cede turno
-		write(t2,&testigo,sizeof(char));
+		write(t1,&testigo,sizeof(char));
 	}
 	return;
 }
@@ -89,16 +95,22 @@ void generarPares(int tuberia, int t1, int t2){
 void generarImpares(int tuberia, int t1, int t2){
 	int i=0,aux;
 	char testigo;
-	for (i = 1; i < 20; i=i+10){
+	for (i = 1; i < 50; i=i+10){
 		//espera turno
 		read(t2,&testigo,sizeof(char));
 		//inserta numero a pipe
-		aux=i+10;
-		for(int j =i;j<aux;j=j+2){
-			write(tuberia,&j,sizeof(int));
-		}
+			write(tuberia,&i,sizeof(int));
+			i+=2;
+			write(tuberia,&i,sizeof(int));
+			i+=2;
+			write(tuberia,&i,sizeof(int));
+			i+=2;
+			write(tuberia,&i,sizeof(int));
+			i+=2;
+			write(tuberia,&i,sizeof(int));
+			i+=2;
 		//cede turno
-		write(t2,&testigo,sizeof(char));
+		write(t1,&testigo,sizeof(char));
 	}
 	return;
 }
