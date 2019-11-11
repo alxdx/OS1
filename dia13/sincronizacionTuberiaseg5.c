@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
+<<<<<<< HEAD
 #include <signal.h>
 #include <stdlib.h>
 
@@ -12,16 +13,21 @@ int main(int argc, char const *argv[]){
 
 	int tuberia[2];
 	int t1[2], t2[2],pid1,pid2;
+=======
+>>>>>>> 199dc2bde2465e6ae225a2533f8410a9c0793925
 	if (pipe(tuberia)<0){
 		perror("no se puede crear la tuberia");	
 		exit(0);
 	}
 	if (pipe(t1)<0){
+<<<<<<< HEAD
 		perror("no se puede crear la tuberia");
 		exit(0);
 	}
 	if (pipe(t2)<0){
 		perror("no se puede crear la tuberia");
+=======
+>>>>>>> 199dc2bde2465e6ae225a2533f8410a9c0793925
 		exit(0);
 	}
 
@@ -69,37 +75,62 @@ int main(int argc, char const *argv[]){
 }
 
 void generarPares(int tuberia, int t1, int t2){
+<<<<<<< HEAD
 	int i=0;
+=======
+>>>>>>> 199dc2bde2465e6ae225a2533f8410a9c0793925
 	char testigo;
 	write(tuberia,&i,sizeof(int));
 	//cede el turno a p2
 	write(t1,&testigo,sizeof(char));
+<<<<<<< HEAD
   
-	for (int i = 2; i < 20; i=i+2){
+	
+=======
+	for (i = 2; i < 50; i=i+10){
 		//espera turno
 		read(t2,&testigo,sizeof(char));
 		//inserta numero a pipe
-		for(int j=i;j<(i+5);j++)
-      write(tuberia,&j,sizeof(int));
-		i+=5;
-    //cede turno
-		write(t2,&testigo,sizeof(char));
+			write(tuberia,&i,sizeof(int));
+			i+=2;
+			write(tuberia,&i,sizeof(int));
+			i+=2;
+			write(tuberia,&i,sizeof(int));
+			i+=2;
+			write(tuberia,&i,sizeof(int));
+			i+=2;
+			write(tuberia,&i,sizeof(int));
+			i+=2;
+		//cede turno
+		write(t1,&testigo,sizeof(char));
+>>>>>>> 199dc2bde2465e6ae225a2533f8410a9c0793925
 	}
 	return;
 }
 
 void generarImpares(int tuberia, int t1, int t2){
-	int i=0;
+<<<<<<< HEAD
+
+=======
+	int i=0,aux;
 	char testigo;
-	for (int i = 1; i < 20; i=i+2){
+	for (i = 1; i < 50; i=i+10){
 		//espera turno
 		read(t2,&testigo,sizeof(char));
 		//inserta numero a pipe
-    for(int j=i;j<(i+5);j++)
-      write(tuberia,&j,sizeof(int));
-		i+=5;
-    //cede turno
-		write(t2,&testigo,sizeof(char));
+			write(tuberia,&i,sizeof(int));
+			i+=2;
+			write(tuberia,&i,sizeof(int));
+			i+=2;
+			write(tuberia,&i,sizeof(int));
+			i+=2;
+			write(tuberia,&i,sizeof(int));
+			i+=2;
+			write(tuberia,&i,sizeof(int));
+			i+=2;
+		//cede turno
+		write(t1,&testigo,sizeof(char));
+>>>>>>> 199dc2bde2465e6ae225a2533f8410a9c0793925
 	}
 	return;
 }
@@ -110,4 +141,7 @@ void consumirNumeros(int tuberia){
 		printf("%d\n", i);
 	}
 	return;
+<<<<<<< HEAD
 }
+=======
+>>>>>>> 199dc2bde2465e6ae225a2533f8410a9c0793925

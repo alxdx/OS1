@@ -1,20 +1,25 @@
 #include <stdio.h>
 #include <unistd.h>
-#include <fctl.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <signal.h>
 int main(int argc, char const *argv[]){
 
-	int tuberia[2];
-	int t1[2], t2[2],pid1,pid2;
+	void generarPares(int tuberia, int t1, int t2);
+	void generarImpares(int tuberia, int t1, int t2);
+	void consumirNumeros(int tuberia);
+
+	int t1[2], t2[2],tuberia[2],pid1,pid2;
 	if (pipe(tuberia)<0){
-		perror("no se puede crear la tuberia")	
+		perror("no se puede crear la tuberia");	
 		exit(0);
 	}
 	if (pipe(t1)<0){
-		perror("no se puede crear la tuberia")	
+		perror("no se puede crear la tuberia");	
 		exit(0);
 	}
 	if (pipe(t2)<0){
-		perror("no se puede crear la tuberia")	
+		perror("no se puede crear la tuberia");	
 		exit(0);
 	}
 
